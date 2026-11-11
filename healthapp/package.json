@@ -7,8 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "multiply": "tsc && node multiplier.ts",
-    "calculateBmi": "tsc && node bmiCalculator.ts"
+    "calculateBmi": "tsc && node bmiCalculator.ts",
+    "calculateExercises": "tsc && node exerciseCalculator.ts"
   },
   "keywords": [],
   "author": "",
