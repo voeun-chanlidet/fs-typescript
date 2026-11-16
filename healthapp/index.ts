@@ -1,8 +1,31 @@
 import express from "express";
+import { calculateBmi } from "./bmiCalculator.ts";
+import { isNotNumber } from "./utils.ts";
 const app = express();
 
 app.get("/hello", (_req, res) => {
   res.send("Hello Full Stack!");
+});
+
+app.get("/bmi", (req, res) => {
+  const height = Number(req.query.height);
+  const weight = Number(req.query.weight);
+
+  if (height <= 0 || weight <= 0) {
+    res.status(400).json({ error: "malformatted parameters" });
+    return;
+  }
+
+  if (isNotNumber(req.query.height) || isNotNumber(req.query.weight)) {
+    res.status(400).json({ error: "malformatted parameters" });
+    return;
+  }
+
+  res.json({
+    height,
+    weight,
+    bmi: calculateBmi(height, weight),
+  });
 });
 
 const PORT = 3003;
