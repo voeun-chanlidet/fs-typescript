@@ -39,7 +39,7 @@ const parseArguments = (args: string[]): InputValues => {
   return { target, trainingHours };
 };
 
-const calculateExercises = (
+export const calculateExercises = (
   trainingHours: number[],
   target: number,
 ): Result => {
@@ -79,13 +79,15 @@ const calculateExercises = (
   };
 };
 
-try {
-  const { target, trainingHours } = parseArguments(process.argv);
-  console.log(calculateExercises(trainingHours, target));
-} catch (error: unknown) {
-  let errorMessage = "Something bad happened.";
-  if (error instanceof Error) {
-    errorMessage += " Error: " + error.message;
+if (process.argv[1] === import.meta.filename) {
+  try {
+    const { target, trainingHours } = parseArguments(process.argv);
+    console.log(calculateExercises(trainingHours, target));
+  } catch (error: unknown) {
+    let errorMessage = "Something bad happened.";
+    if (error instanceof Error) {
+      errorMessage += " Error: " + error.message;
+    }
+    console.log(errorMessage);
   }
-  console.log(errorMessage);
 }
